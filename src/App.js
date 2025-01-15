@@ -12,11 +12,13 @@ function App() {
   const [newItem, setNewItem] = useState("");
   const [search, setSearch] = useState("");
 
+  // save Items to localStorage
   const setAndSaveItems = (newItems) => {
     setItems(newItems);
     localStorage.setItem("items", JSON.stringify(newItems));
   };
 
+  // add checked 
   const chekedItem = (item) => {
     const chekedItem = items.map((i) =>
       i.id === item.id ? { ...i, checked: !i.checked } : i
@@ -24,11 +26,13 @@ function App() {
     setAndSaveItems(chekedItem);
   };
 
+  // delete Item
   const deleteItem = (item) => {
     const updatedItems = items.filter((i) => i.id !== item.id);
     setAndSaveItems(updatedItems);
   };
 
+  // add Item
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const newItem = { id, checked: false, item };
@@ -36,6 +40,7 @@ function App() {
     setAndSaveItems(newItems);
   };
 
+  // submit button
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newItem) return;
